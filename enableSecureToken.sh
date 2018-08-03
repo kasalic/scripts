@@ -23,5 +23,3 @@ then
 else
    "$jh" "${jh_args[@]}" "$message" ; sysadminctl interactive -secureTokenOn cadmin -password itechPW001
 fi
-
-echo $FV2USERS
