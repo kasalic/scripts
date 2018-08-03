@@ -15,8 +15,6 @@ jh_args=(\
 message="In order to complete FileVault setup, please enter your password when prompted. \
 	It is important that you complete this step to enable us to ensure the data on you Mac is protected."
 
-# echo $FV2USERS
-
 if [[ ${FV2USERS} = *"cadmin"* ]] ; 
 then
     /bin/echo "cadmin is already an FV2 enabled User"
