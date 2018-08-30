@@ -8,8 +8,8 @@
 function GenerateEncryptedString() {
     # Usage ~$ GenerateEncryptedString "String"
     local STRING="${1}"
-    local SALT=$(openssl rand -hex 8)
-    local K=$(openssl rand -hex 12)
+    local SALT="7deb97b94999184e"
+    local K="641d7032b0bf433ce3813b96"
     local ENCRYPTED=$(echo "${STRING}" | openssl enc -aes256 -a -A -S "${SALT}" -k "${K}")
     echo "Encrypted String: ${ENCRYPTED}"
     echo "Salt: ${SALT} | Passphrase: ${K}"
@@ -30,4 +30,4 @@ function DecryptString() {
     echo "${1}" | /usr/bin/openssl enc -aes256 -d -a -A -S "$SALT" -k "$K"
 }
 
-GenerateEncryptedString "https://dwr.jamfcloud.com"
+GenerateEncryptedString "itechPW001"
