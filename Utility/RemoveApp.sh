@@ -7,7 +7,7 @@
 
 # The first parameter is used to kill the app. It should be the app name or path
 # as required by the pkill command.
-applicationPath="$4"
+applicationPath="Microsoft Remote Desktop"
 
 if [[ -z "${applicationPath}" ]]; then
     echo "No application specified!"
