@@ -494,7 +494,7 @@ policy_array_cr=('
             "trigger_list": [
                 {
                     "trigger": "install_horos",
-                    "path": ""
+                    "path": "/Applications/Horos.app/Contents/info.plist"
                 }
             ]
         },
