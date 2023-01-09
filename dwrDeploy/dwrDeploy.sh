@@ -489,8 +489,8 @@ policy_array_cr=('
         },
         {
             "listitem": "Horos",
-            "icon": "d317dccda6a6aa14b8b6748f4189835803e4b6ab903cc1185bd8a811f5aaff0a",
-            "progresstext": "OsiriX allows you to read DICOM images downloaded from our PACS systems.",
+            "icon": "716d85e2c641032f1ecb2a1b74eee5f8dd09221c9342dce85a3f5d810c8f2054",
+            "progresstext": "Horos allows you to read DICOM images downloaded from our PACS systems.",
             "trigger_list": [
                 {
                     "trigger": "install_horos",
