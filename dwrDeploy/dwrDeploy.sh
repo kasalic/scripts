@@ -392,7 +392,112 @@ policy_array_di=('
                 }
             ]
         },
+        {
+            "listitem": "Add Dock Items",
+            "icon": "1cc5732e26542f732aafd13d1f4913ba9b33c77f1efc85a16d507993eb45e705",
+            "progresstext": "Adding commonly used applications to your macOS Dock.",
+            "trigger_list": [
+                {
+                    "trigger": "dock_add_dep_apps",
+                    "path": ""
+                }
+            ]
+        },
+        {
+            "listitem": "Computer Inventory",
+            "icon": "90958d0e1f8f8287a86a1198d21cded84eeea44886df2b3357d909fe2e6f1296",
+            "progresstext": "A listing of your Mac’s apps and settings — its inventory — is sent automatically to the Jamf Pro server daily.",
+            "trigger_list": [
+                {
+                    "trigger": "recon",
+                    "path": ""
+                }
+            ]
+        }
+    ]
+}
+')
 
+policy_array_cr=('
+{
+    "steps": [
+        {
+            "listitem": "FileVault Disk Encryption",
+            "icon": "f9ba35bd55488783456d64ec73372f029560531ca10dfa0e8154a46d7732b913",
+            "progresstext": "FileVault is built-in to macOS and provides full-disk encryption to help prevent unauthorized access to your Mac.",
+            "trigger_list": [
+                {
+                    "trigger": "FileVaultDEP",
+                    "path": "/Library/Preferences/com.apple.fdesetup.plist"
+                }
+            ]
+        },
+        {
+            "listitem": "Google Chrome",
+            "icon": "fb48e96c34d449ef5ff0d56e983a034927320195be69a02c076b6270a4e19d54",
+            "progresstext": "Google Chrome is a browser that combines a minimal design with sophisticated technology to make the Web faster.",
+            "trigger_list": [
+                {
+                    "trigger": "install_chrome",
+                    "path": "/Applications/Google Chrome.app/Contents/Info.plist"
+                }
+            ]
+        },
+        {
+            "listitem": "Dock Utility",
+            "icon": "140ec33f6b1c130009bf43ac653bdcfeb8776f11121c8d466b9e63b4559d2a01",
+            "progresstext": "Dock Utility allows us to add usefull applications to your macOS dock.",
+            "trigger_list": [
+                {
+                    "trigger": "install_dockutil",
+                    "path": "/usr/local/bin/dockutil"
+                }
+            ]
+        },
+        {
+            "listitem": "3CX Desktop App",
+            "icon": "09c15bd53edc4dad7c8f263f77d4a8ddac15d7d01c3992bb18b66e212a52a64d",
+            "progresstext": "3CX is our phone system, and this app will let you make and receive calls and messages from your computer.",
+            "trigger_list": [
+                {
+                    "trigger": "install_3cxapp",
+                    "path": "/Applications/3CX Desktop App.app/Contents/info.plist"
+                }
+            ]
+        },
+        {
+            "listitem": "Microsoft Remote Desktop",
+            "icon": "7b68ab383fc96939588bbe42b8fcc9791ce1732c2d463e6ae5583e9558226e45",
+            "progresstext": "Microsoft Remote Desktop allows you to access our RxWorks Practice Management Software.",
+            "trigger_list": [
+                {
+                    "trigger": "install_microsoftremotedesktop",
+                    "path": "/Applications/Microsoft Remote Desktop.app/Contents/info.plist"
+                }
+            ]
+        },
+        {
+            "listitem": "TeamViewer",
+            "icon": "e2452ab24a46b4f56b87b37d06fe17022677da8e9fabf31b155890b1dddeca6d",
+            "progresstext": "TeamViewer will allow the IT team to remotely access your computer if you need support.",
+            "trigger_list": [
+                {
+                    "trigger": "install_teamviewer",
+                    "path": ""
+                }
+            ]
+        },
+        {
+            "listitem": "Horos",
+            "icon": "d317dccda6a6aa14b8b6748f4189835803e4b6ab903cc1185bd8a811f5aaff0a",
+            "progresstext": "OsiriX allows you to read DICOM images downloaded from our PACS systems.",
+            "trigger_list": [
+                {
+                    "trigger": "install_osirix",
+                    "path": ""
+                }
+            ]
+        },
         {
             "listitem": "Add Dock Items",
             "icon": "1cc5732e26542f732aafd13d1f4913ba9b33c77f1efc85a16d507993eb45e705",
@@ -1173,7 +1278,11 @@ if [[ "${welcomeDialog}" == "true" ]]; then
                 # firstEightSerialNumber=$( system_profiler SPHardwareDataType | awk '/Serial\ Number\ \(system\)/ {print $NF}' | cut -c 1-8 )
                 # lastSixMAC=$( ifconfig en0 | awk '/ether/ {print $2}' | sed 's/://g' | cut -c 7-12 )
                 # newLocalHostName=${firstEightSerialNumber}-${lastSixMAC}
+                if [[ $loggedInUser == "Consult" ]]; then
+                    newLocalHostName=${firstEightSerialNumber}-${loggedInUserFirstname}
+                else
                 newLocalHostName=${assetTag}-${loggedInUserFirstname}
+                fi
 
                 if [[ "${debugMode}" == "true" ]]; then
 
@@ -1275,6 +1384,9 @@ fi
 if [[ $department == "Diagnostic Imaging" ]]; then
     policy_array="$policy_array_di"
     updateScriptLog "SETUP YOUR MAC DIALOG: policy_array to policy_array_di"
+elif [[ $loggedInUser == "Consult" ]]; then
+    policy_array="$policy_array_cr"
+    updateScriptLog "SETUP YOUR MAC DIALOG: policy_array to policy_array_cr"
 fi
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
