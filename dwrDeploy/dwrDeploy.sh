@@ -493,7 +493,7 @@ policy_array_cr=('
             "progresstext": "OsiriX allows you to read DICOM images downloaded from our PACS systems.",
             "trigger_list": [
                 {
-                    "trigger": "install_osirix",
+                    "trigger": "install_horos",
                     "path": ""
                 }
             ]
